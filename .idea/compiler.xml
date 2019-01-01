@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="taotao-manager-web" />
+      </profile>
+      <profile name="Annotation profile for taotao-manager-pojo" enabled="true">
+        <sourceOutputDir name="../../taotaomanager/taotao-manager-pojo/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../taotaomanager/taotao-manager-pojo/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="taotao-manager-pojo" />
+      </profile>
+      <profile name="Annotation profile for taotao-manager-service" enabled="true">
+        <sourceOutputDir name="../../taotaomanager/taotao-manager-service/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../taotaomanager/taotao-manager-service/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="taotao-manager-service" />
+      </profile>
+      <profile name="Annotation profile for taotao-manager-dao" enabled="true">
+        <sourceOutputDir name="../../taotaomanager/taotao-manager-dao/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../taotaomanager/taotao-manager-dao/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="taotao-manager-dao" />
+      </profile>
+      <profile name="Annotation profile for taotao-manager" enabled="true">
+        <sourceOutputDir name="../../taotaomanager/taotao-manager-interface/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../taotaomanager/taotao-manager-interface/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="taotao-manager-interface" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
