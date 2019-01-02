@@ -14,6 +14,11 @@
     <packaging>war</packaging>
 
     <dependencies>
+        <dependency>
+            <artifactId>taotao-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <groupId>com.taotao</groupId>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

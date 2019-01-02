@@ -12,6 +12,8 @@
         <option value="$PROJECT_DIR$/taotaocommon/pom.xml" />
         <option value="$PROJECT_DIR$/taotaomanager/pom.xml" />
         <option value="$PROJECT_DIR$/taotao-manager-web/pom.xml" />
+        <option value="$PROJECT_DIR$/taotao-common/pom.xml" />
+        <option value="$PROJECT_DIR$/taotao-manager/pom.xml" />
       </list>
     </option>
   </component>

@@ -7,6 +7,7 @@
         <groupId>com.taotao</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>taotao-manager</artifactId>
@@ -27,5 +28,20 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <!--启动工程的工程名-->
+                    <path>/</path>
+                    <!--端口号-->
+                    <!--访问的时候输入localhost:8081/-->
+                    <port>8080</port>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
