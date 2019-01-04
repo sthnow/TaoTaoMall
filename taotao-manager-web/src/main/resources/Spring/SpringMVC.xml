@@ -25,7 +25,7 @@
     <!--<mvc:resources location="/css/" mapping="/css/**"/>-->
     <!--<mvc:resources location="/js/" mapping="/js/**"/>-->
     <!--&lt;!&ndash; 引用dubbo服务 &ndash;&gt;-->
-    <!--<dubbo:application name="taotao-manager-web"/>-->
-    <!--<dubbo:registry protocol="zookeeper" address="192.168.25.167:2181"/>-->
-    <!--<dubbo:reference interface="ItemService" id="itemService" />-->
+    <dubbo:application name="taotao-manager-web"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.25.167:2181"/>
+    <dubbo:reference interface="com.taotao.service.ItemService" id="itemService" />
 </beans>
