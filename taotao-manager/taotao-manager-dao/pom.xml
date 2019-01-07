@@ -51,4 +51,16 @@
     </dependencies>
 
 
+    <!--如果没有配置该选项，默认只编译.java文件，而不编译.xml文件-->
+    <!--会报错 mybatis没有实现类-->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>

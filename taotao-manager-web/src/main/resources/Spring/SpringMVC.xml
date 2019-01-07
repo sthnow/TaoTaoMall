@@ -21,11 +21,35 @@
 
     <!-- 配置包扫描器，扫描@Controller注解的类 -->
     <context:component-scan base-package="com.taotao.controller"/>
-    <!--&lt;!&ndash; 配置资源映射 &ndash;&gt;-->
+    <!-- 配置资源映射 -->
     <!--<mvc:resources location="/css/" mapping="/css/**"/>-->
     <!--<mvc:resources location="/js/" mapping="/js/**"/>-->
+
     <!--&lt;!&ndash; 引用dubbo服务 &ndash;&gt;-->
     <dubbo:application name="taotao-manager-web"/>
-    <dubbo:registry   protocol="zookeeper" address="192.168.93.88:2181"/>
-    <dubbo:reference interface="com.taotao.service.ItemService" id="itemService" />
+    <dubbo:registry   protocol="zookeeper" address="zookeeper://192.168.93.88:2181"/>
+    <dubbo:reference  interface="com.taotao.service.ItemService" id="itemService" />
+
+
+    <!--&lt;!&ndash;消费方dubbo的配置&ndash;&gt;-->
+    <!--&lt;!&ndash;采用直连的形式，不通过注册中心zookeeper获取服务，直接通过端口通信-->
+   <!--&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;消费方应用信息，用于计算依赖关系&ndash;&gt;&ndash;&gt;-->
+    <!--<dubbo:application name="consumer"/>-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;采用直连，不实用注册中心&ndash;&gt;&ndash;&gt;-->
+    <!--<dubbo:registry address="N/A"/>-->
+
+    <!--<dubbo:reference interface="com.taotao.service.ItemService" id="itemService"-->
+                     <!--url="dubbo://127.0.0.1:10001"/>-->
+
+
+    <!--配置资源映射-->
+    <!--如果不配置这个，SpringMVC会拦截掉静态资源-->
+    <!--配置这个让SpringMVC放行静态资源文件-->
+    <!-- ** 表示多级目录-->
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+
 </beans>

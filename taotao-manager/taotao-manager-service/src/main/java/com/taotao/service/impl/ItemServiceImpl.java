@@ -1,4 +1,4 @@
-package com.taotao.impl;
+package com.taotao.service.impl;
 
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ItemServiceImpl implements ItemService {
+
     @Autowired
     private TbItemMapper itemMapper;
 

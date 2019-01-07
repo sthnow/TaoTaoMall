@@ -14,28 +14,31 @@ http://code.alibabatech.com/schema/dubbo ">
     <!-- 配置包扫描器，扫描所有带@Service注解的类 -->
     <context:component-scan base-package="com.taotao.service"/>
 
-    <!-- 发布dubbo服务 -->
-    <!-- 提供方应用信息，用于计算依赖关系 -->
+
+    <bean id="itemServiceImpl" class="com.taotao.service.impl.ItemServiceImpl"></bean>
+
+    <!--&lt;!&ndash; 发布dubbo服务 &ndash;&gt;-->
+    <!--&lt;!&ndash; 提供方应用信息，用于计算依赖关系 &ndash;&gt;-->
     <dubbo:application name="taotao-manager"/>
     <!-- 注册中心的地址 -->
-    <dubbo:registry protocol="zookeeper" address="192.168.93.88:2181"/>
+    <dubbo:registry  protocol="zookeeper" address="zookeeper://192.168.93.88:2181"/>
     <!-- 用dubbo协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20880"/>
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl" />
     <!--<dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl" timeout="300000"/>-->
-    
-    <!--发布dubbo服务-->
 
-    <!-- 发布dubbo服务 -->
-    <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="taotao-manager" />
-    <!-- 注册中心的地址 -->
-    <!--<dubbo:registry protocol="zookeeper" address="192.168.25.167:2181" />-->
-    <dubbo:registry protocol="zookeeper" address="192.168.93.88:2181" />
-    <!-- 用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20880" />
-    <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl"/>
-    <!--<dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl" timeout="300000"/>-->
+
+    <!--&lt;!&ndash;服务采用直连的方式，不使用注册中心zookeeper&ndash;&gt;-->
+    <!--&lt;!&ndash;配置方法就是直接配置服务的url，消费方直接访问该url获取服务&ndash;&gt;-->
+    <!--<dubbo:application name="provider"/>-->
+
+    <!--&lt;!&ndash;采用直连，不实用注册中心&ndash;&gt;-->
+    <!--<dubbo:registry address="N/A"/>-->
+
+    <!--&lt;!&ndash;采用直连，不适用注册中心&ndash;&gt;-->
+    <!--<dubbo:protocol name="dubbo" host="127.0.0.1" port="10001"/>-->
+
+    <!--<dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl" />-->
+
 </beans>

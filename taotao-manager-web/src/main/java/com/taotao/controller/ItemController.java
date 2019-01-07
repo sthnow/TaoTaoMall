@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-@Controller
 /**
  * 商品管理Controller
  */
-public class ItemController {
 
+@Controller
+
+public class ItemController {
     @Autowired
     private ItemService itemService;
 
