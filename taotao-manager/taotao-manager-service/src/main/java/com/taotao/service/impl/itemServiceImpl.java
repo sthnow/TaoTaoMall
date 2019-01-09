@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Service
-public class ItemServiceImpl implements ItemService {
+public class itemServiceImpl implements ItemService {
 
     @Autowired
     private TbItemMapper itemMapper;
