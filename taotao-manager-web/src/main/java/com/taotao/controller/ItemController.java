@@ -1,6 +1,7 @@
 package com.taotao.controller;
 
 
+import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.pojo.TbItem;
 
 //import com.taotao.service.ItemService;
@@ -29,5 +30,15 @@ public class ItemController {
         TbItem tbItem = itemService.getItemById(itemId);
         return tbItem;
     }
+
+
+    @RequestMapping("/item/list")
+    @ResponseBody
+    public EasyUIDataGridResult getItemList(Integer page, Integer rows){
+        //controller层调用service层提供的服务
+        EasyUIDataGridResult result = itemService.getItemList(page,rows);
+        return result;
+    }
+
 
 }
