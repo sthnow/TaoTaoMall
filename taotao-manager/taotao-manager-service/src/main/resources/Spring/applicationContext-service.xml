@@ -12,7 +12,7 @@
 http://code.alibabatech.com/schema/dubbo ">
 
     <!-- 配置包扫描器，扫描所有带@Service注解的类 -->
-    <context:component-scan base-package="com.taotao.service.impl"/>
+    <context:component-scan base-package="com.taotao.service"/>
 
 
     <bean id="itemServiceImpl" class="com.taotao.service.impl.itemServiceImpl"></bean>
