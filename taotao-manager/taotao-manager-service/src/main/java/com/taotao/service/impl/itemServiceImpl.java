@@ -32,6 +32,8 @@ public class itemServiceImpl implements ItemService {
      */
     public EasyUIDataGridResult getItemList(int page, int rows) {
         //设置分页信息
+        //page-第几页
+        //rows-返回第几行到第几行
         PageHelper.startPage(page, rows);
         //创建example
         //不设置查询条件，即查询所有
