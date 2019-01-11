@@ -1,10 +1,11 @@
+import com.taotao.utils.FastDFSClient;
 import jdk.nashorn.internal.objects.Global;
 import org.csource.fastdfs.*;
 import org.junit.Test;
 
 public class TestFastDFS {
-@Test
-    public void uploadFile() throws Exception{
+    @Test
+    public void uploadFile() throws Exception {
         //1.向工程中添加jar包
         //2.创建一个配置文件，配置tracker服务器的地址
         //3.加载配置文件
@@ -18,11 +19,16 @@ public class TestFastDFS {
         //7.创建一个storageClient对象，传入trackerServer，storageServer两个参数
         StorageClient storageClient = new StorageClient(trackerServer, storageServer);
         //8.使用StorageClient对象上传文件
-       String[] strings =  storageClient.upload_file("C:\\onedrive\\图片\\调通的程序\\实现商品类目选择.jpg","jpg",null);
-       for (String string :strings){
-           System.out.println(string);
-       }
+        String[] strings = storageClient.upload_file("C:\\onedrive\\图片\\调通的程序\\实现商品类目选择.jpg", "jpg", null);
+        for (String string : strings) {
+            System.out.println(string);
+        }
+    }
 
-
+    @Test
+    public void testFastDfsClient() throws Exception {
+        FastDFSClient fastDFSClient = new FastDFSClient("C:\\Users\\wangz\\IdeaProjects\\taotaoparent\\taotao-manager-web\\src\\main\\resources\\resource\\client.conf");
+        String string = fastDFSClient.uploadFile("C:\\onedrive\\图片\\调通的程序\\dubbo监控中心发布成功！.jpg");
+        System.out.println(string);
     }
 }
