@@ -49,6 +49,7 @@ public class ItemController {
     //表单的数据由springMVC封装到pojo里面
     public TaotaoResult addItem(TbItem item, String desc) {
         //前端页面通过向注册中心请求接口方法的url，然后通过该url从dubbo中获取服务
+        //商品的id不从pojo类中获取，而是用IDUtils生成一个id存储到服务器中
         TaotaoResult result = itemService.addItem(item, desc);
         return result;
     }

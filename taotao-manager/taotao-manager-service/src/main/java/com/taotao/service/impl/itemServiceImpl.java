@@ -67,14 +67,17 @@ public class itemServiceImpl implements ItemService {
      * 实现添加商品的方法
      */
     public TaotaoResult addItem(TbItem item, String desc) {
-        //生成商品id
+        //使用IDUtils工具生成商品的id，使用这个工具类生成id是因为这个工具类里面封装了一些方法，使得生成的id不易重复
         long itemId = IDUtils.genItemId();
-        //补全item的属性
+
+        //从pojo中获取属性
+        //补全item的属性，因为要存放到数据库的表中，该有的属性必须要有
         item.setId(itemId);
         //商品状态，1-正常，2-下架，3-删除
         item.setStatus((byte) 1);
         item.setCreated(new Date());
         item.setUpdated(new Date());
+        //使用DAO层中接口的方法向数据库添加数据
         //向商品表插入数据
         itemMapper.insert(item);
         //创建一个商品描述表的pojo

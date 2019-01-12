@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/taotao-manager-web" />
     <file type="web" url="file://$PROJECT_DIR$/taotao-manager/taotao-manager-service" />
+    <file type="web" url="file://$PROJECT_DIR$/taotao-portal-web" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -15,6 +16,7 @@
         <option value="$PROJECT_DIR$/taotao-common/pom.xml" />
         <option value="$PROJECT_DIR$/taotao-manager/pom.xml" />
         <option value="C:/DOC/java黑马/【阶段17】淘淘商城综合项目/【阶段17】淘淘商城综合项目2/参考资料/FastDFS/bin/fastdfs_client/pom.xml" />
+        <option value="$PROJECT_DIR$/taotao-portal-web/pom.xml" />
       </list>
     </option>
   </component>
