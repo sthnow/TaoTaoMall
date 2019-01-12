@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 淘淘商城自定义响应结构
+ * 使用该pojo存储数据，然后springMVC转换成json串响应给前端页面
+ * 因为要在网络上传输，所以要实现Serializable序列化接口
  */
 public class TaotaoResult implements Serializable {
 

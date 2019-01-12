@@ -46,8 +46,23 @@ public class ItemController {
 
     @RequestMapping("/item/save")
     @ResponseBody
+    //表单的数据由springMVC封装到pojo里面
     public TaotaoResult addItem(TbItem item, String desc) {
+        //前端页面通过向注册中心请求接口方法的url，然后通过该url从dubbo中获取服务
         TaotaoResult result = itemService.addItem(item, desc);
+        return result;
+    }
+
+    //实现商品的删除功能
+    //思路分析：
+        //首先在前端页面中获取到请求的url
+        //然后获取到请求删除商品的id
+        //通过在服务层编写删除的方法
+        //服务层调用DAO层的删除方法删除商品
+    @RequestMapping("/rest/item/delete")
+    @ResponseBody
+    public TaotaoResult deleteItem(long ids){
+        TaotaoResult result = itemService.deleteItem(ids);
         return result;
     }
 }

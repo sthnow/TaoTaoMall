@@ -90,4 +90,10 @@ public class itemServiceImpl implements ItemService {
         //返回结果
         return TaotaoResult.ok();
     }
+
+    @Override
+    public TaotaoResult deleteItem(long ids) {
+        itemMapper.deleteByPrimaryKey(ids);
+        return TaotaoResult.ok();
+    }
 }
