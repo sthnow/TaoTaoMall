@@ -1,5 +1,4 @@
-import com.taotao.utils.FastDFSClient;
-import jdk.nashorn.internal.objects.Global;
+import com.taotao.common.utils.FastDFSClient;
 import org.csource.fastdfs.*;
 import org.junit.Test;
 
