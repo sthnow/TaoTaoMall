@@ -92,8 +92,10 @@ public class itemServiceImpl implements ItemService {
     }
 
     @Override
-    public TaotaoResult deleteItem(long ids) {
-        itemMapper.deleteByPrimaryKey(ids);
+    public TaotaoResult deleteItem(long[] ids) {
+        for(long id:ids) {
+            itemMapper.deleteByPrimaryKey(id);
+        }
         return TaotaoResult.ok();
     }
 }

@@ -61,7 +61,7 @@ public class ItemController {
         //服务层调用DAO层的删除方法删除商品
     @RequestMapping("/rest/item/delete")
     @ResponseBody
-    public TaotaoResult deleteItem(long ids){
+    public TaotaoResult deleteItem(long[] ids){
         TaotaoResult result = itemService.deleteItem(ids);
         return result;
     }

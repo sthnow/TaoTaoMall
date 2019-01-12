@@ -12,5 +12,5 @@ public interface ItemService {
 
     TaotaoResult addItem(TbItem item,String desc);
 
-    TaotaoResult deleteItem(long ids);
+    TaotaoResult deleteItem(long[] ids);
 }
