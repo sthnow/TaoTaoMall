@@ -2,6 +2,7 @@ package com.taotao.controller;
 
 
 import com.taotao.common.pojo.EasyUIDataGridResult;
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
 
 //import com.taotao.service.ItemService;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.swing.border.TitledBorder;
 
 /**
  * 商品管理Controller
@@ -41,4 +44,10 @@ public class ItemController {
     }
 
 
+    @RequestMapping("/item/save")
+    @ResponseBody
+    public TaotaoResult addItem(TbItem item, String desc) {
+        TaotaoResult result = itemService.addItem(item, desc);
+        return result;
+    }
 }
