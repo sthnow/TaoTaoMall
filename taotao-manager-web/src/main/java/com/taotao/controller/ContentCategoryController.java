@@ -2,6 +2,7 @@ package com.taotao.controller;
 
 
 import com.taotao.common.pojo.EasyUITreeNode;
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.content.service.ContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,15 @@ public class ContentCategoryController {
             (@RequestParam(value = "id",defaultValue = "0") long parentId){
         List<EasyUITreeNode> list = contentCategoryService.getContentCategoryList(parentId);
         return list;
+    }
+
+
+    @RequestMapping("/content/category/create")
+    @ResponseBody
+    public TaotaoResult addContentCategory(long parentId,String name){
+        TaotaoResult result = contentCategoryService.addContentCategory(parentId, name);
+        return result;
+
     }
 
 }
