@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--配置分页插件-->
+    <plugins>
+        <!--interceptor拦截器，在执行查询之前，在sql语句中拼上limit实现分页，所以需要拦截器-->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!--设置数据库的方言-->
+            <!--相当于设置数据库的类型，是oracle还是mysql还是mariaDB-->
+            <property name="dialect" value="mysql"></property>
+        </plugin>
+    </plugins>
+</configuration>

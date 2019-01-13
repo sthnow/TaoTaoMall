@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/taotao-content/taotao-content-service" />
     <file type="web" url="file://$PROJECT_DIR$/taotao-manager-web" />
     <file type="web" url="file://$PROJECT_DIR$/taotao-manager/taotao-manager-service" />
     <file type="web" url="file://$PROJECT_DIR$/taotao-portal-web" />
@@ -17,7 +18,13 @@
         <option value="$PROJECT_DIR$/taotao-manager/pom.xml" />
         <option value="C:/DOC/java黑马/【阶段17】淘淘商城综合项目/【阶段17】淘淘商城综合项目2/参考资料/FastDFS/bin/fastdfs_client/pom.xml" />
         <option value="$PROJECT_DIR$/taotao-portal-web/pom.xml" />
+        <option value="$PROJECT_DIR$/taotao-content/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/taotao-content-interface/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectResources">

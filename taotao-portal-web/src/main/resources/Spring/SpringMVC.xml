@@ -17,6 +17,7 @@
     <!-- 配置注解驱动 -->
     <mvc:annotation-driven />
     <!-- 视图解析器 -->
+    <!--当SpringMVC拦截到请求时，会给controller返回的字符串加上这里配置的前缀和后缀，然后去访问路径下的文件-->
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/" />

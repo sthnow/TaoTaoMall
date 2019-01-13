@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="fastdfs_client" />
         <module name="taotao-common" />
+        <module name="taotao-content-interface" />
+        <module name="taotao-content-service" />
         <module name="taotao-manager-dao" />
         <module name="taotao-manager-interface" />
         <module name="taotao-manager-pojo" />
