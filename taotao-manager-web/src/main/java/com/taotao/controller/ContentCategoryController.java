@@ -36,7 +36,21 @@ public class ContentCategoryController {
     public TaotaoResult addContentCategory(long parentId,String name){
         TaotaoResult result = contentCategoryService.addContentCategory(parentId, name);
         return result;
+    }
 
+    @RequestMapping("/content/category/update")
+    /**
+     * 重命名节点的方法
+     */
+    public void renameContentCategory(long id, String name) {
+        contentCategoryService.renameContentCategory(id, name);
+    }
+
+
+    @RequestMapping("/content/category/delete/")
+    public TaotaoResult deleteContentCategory(long id){
+        contentCategoryService.deleteContentCategory(id);
+        return TaotaoResult.ok();
     }
 
 }

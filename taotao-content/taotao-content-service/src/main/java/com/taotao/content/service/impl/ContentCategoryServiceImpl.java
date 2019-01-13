@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @Service
-public class ContentCategoryServiceImpl  implements ContentCategoryService {
+public class ContentCategoryServiceImpl implements ContentCategoryService {
 
     @Autowired
     private TbContentCategoryMapper contentCategoryMapper;
@@ -36,11 +36,11 @@ public class ContentCategoryServiceImpl  implements ContentCategoryService {
 
         List<EasyUITreeNode> resultList = new ArrayList<>();
 
-        for (TbContentCategory tbContentCategory : list){
+        for (TbContentCategory tbContentCategory : list) {
             EasyUITreeNode node = new EasyUITreeNode();
             node.setId(tbContentCategory.getId());
             node.setText(tbContentCategory.getName());
-            node.setState(tbContentCategory.getIsParent()?"closed":"open");
+            node.setState(tbContentCategory.getIsParent() ? "closed" : "open");
             resultList.add(node);
         }
         return resultList;
@@ -65,7 +65,7 @@ public class ContentCategoryServiceImpl  implements ContentCategoryService {
         //判断父节点的状态
         //查询父节点
         TbContentCategory parent = contentCategoryMapper.selectByPrimaryKey(parentId);
-        if(!parent.getIsParent()){
+        if (!parent.getIsParent()) {
             //如果父节点为叶子节点应该改为父节点
             parent.setIsParent(true);
             //更新父节点
@@ -74,4 +74,26 @@ public class ContentCategoryServiceImpl  implements ContentCategoryService {
         //返回结果
         return TaotaoResult.ok(contentCategory);
     }
+
+    @Override
+    /**
+     * 重命名节点的方法
+     */
+    public void renameContentCategory(long id, String name) {
+        TbContentCategory tbContentCategory = contentCategoryMapper.selectByPrimaryKey(id);
+        //修改节点的名称
+        tbContentCategory.setName(name);
+        //从内存中更新到数据库中
+        contentCategoryMapper.updateByPrimaryKey(tbContentCategory);
+    }
+
+
+    @Override
+    //删除节点的方法
+    public TaotaoResult deleteContentCategory(long id) {
+        contentCategoryMapper.deleteByPrimaryKey(id);
+        return TaotaoResult.ok();
+    }
+
+
 }
