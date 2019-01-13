@@ -16,4 +16,7 @@ public interface ItemService {
 
     //商品下架功能处理
     TaotaoResult instockItem(long[] ids);
+
+    //实现商品上架功能
+    TaotaoResult reshelf(long[] ids);
 }

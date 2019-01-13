@@ -75,4 +75,12 @@ public class ItemController {
         TaotaoResult result = itemService.instockItem(ids);
         return result;
     }
+
+
+    @RequestMapping("/rest/item/reshelf")
+    @ResponseBody
+    public TaotaoResult reshelf(long[] ids){
+        TaotaoResult result = itemService.reshelf(ids);
+        return result;
+    }
 }

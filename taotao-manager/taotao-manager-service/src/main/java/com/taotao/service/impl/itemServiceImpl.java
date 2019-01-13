@@ -102,8 +102,15 @@ public class itemServiceImpl implements ItemService {
     }
 
 
-    //实现商品的下架处理
+
+
     @Override
+
+    /**
+     *  实现商品的下架处理
+     * @param ids
+     * @return
+     */
     public TaotaoResult instockItem(long[] ids) {
         for (long id : ids) {
             //1.创建查询条件通过id查询到商品
@@ -117,6 +124,28 @@ public class itemServiceImpl implements ItemService {
             itemMapper.updateByPrimaryKey(tbItem);
         }
 
+        return TaotaoResult.ok();
+    }
+
+
+    @Override
+    /**
+     * 实现商品上架的方法
+     * 在接口中新添加了一个方法以后要install，如果不适用install相当于还在使用旧的jar包
+     */
+    public TaotaoResult reshelf(long[] ids) {
+        for(long id : ids) {
+            //1.通过主键查询到item
+            TbItem item = itemMapper.selectByPrimaryKey(id);
+            //2.使用pojo中的方法修改其状态属性
+            //商品状态，1-正常，2-下架，3-删除
+            //因为数据库中Status的类型是tinyint类型，即byte类型，因此要强转类型
+            item.setStatus((byte) 1);
+            //3.此时修改完pojo的属性，数据还存在内存中，要通过DAO层中的方法将数据写入（mapper中的update方法）到数据库中
+            itemMapper.updateByPrimaryKey(item);
+        }
+        //如果修改成功，这是一个事件，因为在Application-tran中配置了事务的增强
+        //如果修改成功，返回200，返回200的方法写在了TaoTaoResult中的ok方法
         return TaotaoResult.ok();
     }
 }
