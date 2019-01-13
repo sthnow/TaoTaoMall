@@ -6,6 +6,7 @@ import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
 
 //import com.taotao.service.ItemService;
+import com.taotao.pojo.TbItemExample;
 import com.taotao.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,6 +65,14 @@ public class ItemController {
     @ResponseBody
     public TaotaoResult deleteItem(long[] ids){
         TaotaoResult result = itemService.deleteItem(ids);
+        return result;
+    }
+
+    //实现商品的下架功能
+    @RequestMapping("/rest/item/instock")
+    @ResponseBody
+    public TaotaoResult instockItem(long[] ids){
+        TaotaoResult result = itemService.instockItem(ids);
         return result;
     }
 }

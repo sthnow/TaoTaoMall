@@ -61,7 +61,6 @@ public class itemServiceImpl implements ItemService {
     }
 
 
-
     @Override
     /**
      * 实现添加商品的方法
@@ -96,9 +95,28 @@ public class itemServiceImpl implements ItemService {
 
     @Override
     public TaotaoResult deleteItem(long[] ids) {
-        for(long id:ids) {
+        for (long id : ids) {
             itemMapper.deleteByPrimaryKey(id);
         }
+        return TaotaoResult.ok();
+    }
+
+
+    //实现商品的下架处理
+    @Override
+    public TaotaoResult instockItem(long[] ids) {
+        for (long id : ids) {
+            //1.创建查询条件通过id查询到商品
+            TbItem tbItem = itemMapper.selectByPrimaryKey(id);
+
+            //2.查到商品以后通过设置其status（上架状态为）
+            //商品状态，1-正常，2-下架，3-删除
+            //这时设置完数据还在内存中，要通过mapper更新到数据库中
+            tbItem.setStatus((byte) 2);
+            //使用mapper插入到数据库中
+            itemMapper.updateByPrimaryKey(tbItem);
+        }
+
         return TaotaoResult.ok();
     }
 }

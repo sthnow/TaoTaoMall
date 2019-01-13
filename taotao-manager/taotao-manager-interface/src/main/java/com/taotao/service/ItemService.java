@@ -13,4 +13,7 @@ public interface ItemService {
     TaotaoResult addItem(TbItem item,String desc);
 
     TaotaoResult deleteItem(long[] ids);
+
+    //商品下架功能处理
+    TaotaoResult instockItem(long[] ids);
 }

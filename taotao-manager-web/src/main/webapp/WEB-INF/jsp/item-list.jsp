@@ -140,6 +140,7 @@
         	    if (r){
         	    	var params = {"ids":ids};
                 	$.post("/rest/item/instock",params, function(data){
+                	    //判断返回的状态
             			if(data.status == 200){
             				$.messager.alert('提示','下架商品成功!',undefined,function(){
             					$("#itemList").datagrid("reload");
