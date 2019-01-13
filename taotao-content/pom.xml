@@ -11,6 +11,7 @@
 
     <artifactId>taotao-content</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>taotao-content-interface</module>
         <module>taotao-content-service</module>
