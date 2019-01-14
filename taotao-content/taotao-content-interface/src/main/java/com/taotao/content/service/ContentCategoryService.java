@@ -15,7 +15,7 @@ public interface ContentCategoryService {
 
 
     //重命名节点的方法
-    void renameContentCategory(long id, String name);
+    TaotaoResult renameContentCategory(long id, String name);
 
     //删除节点的方法
     TaotaoResult deleteContentCategory(long id);

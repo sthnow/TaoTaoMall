@@ -42,15 +42,19 @@ public class ContentCategoryController {
     /**
      * 重命名节点的方法
      */
-    public void renameContentCategory(long id, String name) {
+    public TaotaoResult renameContentCategory(long id, String name) {
         contentCategoryService.renameContentCategory(id, name);
+        return TaotaoResult.ok();
     }
 
 
     @RequestMapping("/content/category/delete/")
+    /**
+     * 删除节点的方法
+     */
     public TaotaoResult deleteContentCategory(long id){
-        contentCategoryService.deleteContentCategory(id);
-        return TaotaoResult.ok();
+        TaotaoResult taotaoResult = contentCategoryService.deleteContentCategory(id);
+        return taotaoResult;
     }
 
 }

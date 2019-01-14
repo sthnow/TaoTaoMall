@@ -79,21 +79,58 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
     /**
      * 重命名节点的方法
      */
-    public void renameContentCategory(long id, String name) {
+    public TaotaoResult renameContentCategory(long id, String name) {
         TbContentCategory tbContentCategory = contentCategoryMapper.selectByPrimaryKey(id);
         //修改节点的名称
         tbContentCategory.setName(name);
         //从内存中更新到数据库中
         contentCategoryMapper.updateByPrimaryKey(tbContentCategory);
+
+        return TaotaoResult.ok();
     }
 
 
     @Override
     //删除节点的方法
     public TaotaoResult deleteContentCategory(long id) {
-        contentCategoryMapper.deleteByPrimaryKey(id);
-        return TaotaoResult.ok();
+        //1.首先根据这个id查询到pojo
+        //2.通过pojo中的isParent属性查询是不是父节点
+        //如果不是父节点，删除并返回ok
+        //如果是父节点，不删除并返回
+        TbContentCategory tbContentCategory = contentCategoryMapper.selectByPrimaryKey(id);
+
+        if (!tbContentCategory.getIsParent()) {
+            //将其父节点设置为叶子节点
+            //得到其父节点的id
+            long parentId = tbContentCategory.getParentId();
+            //通过父节点的id查询到父节点
+            //创建example
+            TbContentCategoryExample tbContentCategoryExample = new TbContentCategoryExample();
+            //设置查询条件
+            TbContentCategoryExample.Criteria criteria = tbContentCategoryExample.createCriteria();
+            criteria.andParentIdEqualTo(parentId);
+            //根据example设置查询条件的id查询到list
+            List<TbContentCategory> list = contentCategoryMapper.selectByExample(tbContentCategoryExample);
+
+            //如果list的长度==1，表示这个父节点下只有一个子节点
+            if (list.size() == 1) {
+                //如果该父节点只有一个子节点则设置该父节点为叶子节点
+                TbContentCategory parentNode = contentCategoryMapper.selectByPrimaryKey(parentId);
+                parentNode.setIsParent(false);
+                contentCategoryMapper.updateByPrimaryKey(parentNode);
+            }else {
+                //如果该父节点下有多个子节点则不改变其状态
+//                System.out.println("该父节点下还有其他子节点，不改变其状态");
+            }
+            contentCategoryMapper.deleteByPrimaryKey(id);
+                return TaotaoResult.ok();
+            }
+
+        else {
+                return TaotaoResult.build(500, "notOk");
+            }
+
+        }
+
+
     }
-
-
-}
