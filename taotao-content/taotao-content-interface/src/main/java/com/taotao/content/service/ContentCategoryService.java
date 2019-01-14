@@ -1,5 +1,6 @@
 package com.taotao.content.service;
 
+import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.EasyUITreeNode;
 import com.taotao.common.pojo.TaotaoResult;
 
@@ -20,5 +21,8 @@ public interface ContentCategoryService {
     //删除节点的方法
     TaotaoResult deleteContentCategory(long id);
 
+
+    //分类内容展示
+    EasyUIDataGridResult showContentCategory(long id, int page, int rows);
 
 }

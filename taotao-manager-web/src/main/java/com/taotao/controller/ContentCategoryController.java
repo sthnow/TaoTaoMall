@@ -1,6 +1,7 @@
 package com.taotao.controller;
 
 
+import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.EasyUITreeNode;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.content.service.ContentCategoryService;
@@ -57,4 +58,11 @@ public class ContentCategoryController {
         return taotaoResult;
     }
 
+
+    @RequestMapping("/content/query/list")
+    @ResponseBody
+    public EasyUIDataGridResult showContentCategory(long categoryId, int page, int rows){
+        EasyUIDataGridResult result = contentCategoryService.showContentCategory(categoryId,page,rows);
+        return result;
+    }
 }

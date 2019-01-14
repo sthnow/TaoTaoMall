@@ -1,12 +1,18 @@
 package com.taotao.content.service.impl;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.EasyUITreeNode;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.content.service.ContentCategoryService;
 import com.taotao.mapper.TbContentCategoryMapper;
+import com.taotao.mapper.TbContentMapper;
+import com.taotao.pojo.TbContent;
 import com.taotao.pojo.TbContentCategory;
 import com.taotao.pojo.TbContentCategoryExample;
+import com.taotao.pojo.TbContentExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +29,8 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 
     @Autowired
     private TbContentCategoryMapper contentCategoryMapper;
+
+    @Autowired TbContentMapper tbContentMapper;
 
     @Override
     public List<EasyUITreeNode> getContentCategoryList(long parentId) {
@@ -132,5 +140,28 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 
         }
 
+    @Override
+    /**
+     * 分类内容展示方法
+     */
+    public EasyUIDataGridResult showContentCategory(long id, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        //通过分类的id查询到一个list
+        //创建example
+        TbContentExample tbContentExample = new TbContentExample();
+        TbContentExample.Criteria criteria = tbContentExample.createCriteria();
+        criteria.andCategoryIdEqualTo(id);
+        //根据设置的条件查询
+        List<TbContent> tbContents = tbContentMapper.selectByExample(tbContentExample);
 
+        PageInfo<TbContent> tbContentPageInfo = new PageInfo<>(tbContents);
+        //将tbContents包装成EasyUIDataGridResult
+        EasyUIDataGridResult result = new EasyUIDataGridResult();
+        //向里面设置数据
+        result.setTotal(tbContentPageInfo.getTotal());
+        result.setRows(tbContents);
+        return result;
     }
+
+
+}
