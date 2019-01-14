@@ -16,6 +16,7 @@ http://code.alibabatech.com/schema/dubbo ">
 
 
     <bean id="contentCategoryService" class="com.taotao.content.service.impl.ContentCategoryServiceImpl"></bean>
+    <bean id="contentService" class="com.taotao.content.service.impl.ContentServiceImpl"></bean>
 
     <!--&lt;!&ndash; 发布dubbo服务 &ndash;&gt;-->
     <!--&lt;!&ndash; 提供方应用信息，用于计算依赖关系 &ndash;&gt;-->
@@ -26,6 +27,7 @@ http://code.alibabatech.com/schema/dubbo ">
     <dubbo:protocol name="dubbo" port="20881"/>
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.taotao.content.service.ContentCategoryService" ref="contentCategoryService" timeout="300000"/>
+    <dubbo:service interface="com.taotao.content.service.ContentService" ref="contentService" timeout="300000"/>
 
     <!--<dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl" timeout="300000"/>-->
 
