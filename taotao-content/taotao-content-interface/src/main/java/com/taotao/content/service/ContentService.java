@@ -9,4 +9,7 @@ public interface ContentService {
 
     //删除内容
     TaotaoResult deleteContent(long[] ids);
+
+    //修改内容
+    TaotaoResult editContent(TbContent content);
 }

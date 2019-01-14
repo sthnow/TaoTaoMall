@@ -34,4 +34,24 @@ public class ContentServiceImpl implements ContentService {
         }
         return TaotaoResult.ok();
     }
+
+    @Override
+    /**
+     * 修改内容的方法
+     */
+    public TaotaoResult editContent(TbContent content) {
+        TbContent tbContent = new TbContent();
+        tbContent.setId(content.getId());
+        tbContent.setCategoryId(content.getCategoryId());
+        tbContent.setTitle(content.getTitle());
+        tbContent.setSubTitle(content.getSubTitle());
+        tbContent.setTitleDesc(content.getTitleDesc());
+        tbContent.setUrl(content.getUrl());
+        tbContent.setPic(content.getPic());
+        tbContent.setPic2(content.getPic2());
+        tbContent.setContent(content.getContent());
+        contentMapper.updateByPrimaryKey(tbContent);
+
+        return TaotaoResult.ok();
+    }
 }

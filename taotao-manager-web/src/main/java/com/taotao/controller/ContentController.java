@@ -27,8 +27,18 @@ public class ContentController {
 
     @RequestMapping("/content/delete")
     @ResponseBody
+    /**
+     * 删除内容的方法
+     */
     public TaotaoResult deleteContent(long[] ids){
         TaotaoResult result = contentService.deleteContent(ids);
+        return result;
+    }
+
+    @RequestMapping("/rest/content/edit")
+    @ResponseBody
+    public TaotaoResult editContent(TbContent tbContent) {
+        TaotaoResult result = contentService.editContent(tbContent);
         return result;
     }
 }
