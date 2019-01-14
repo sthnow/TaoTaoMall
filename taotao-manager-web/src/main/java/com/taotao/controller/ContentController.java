@@ -25,4 +25,10 @@ public class ContentController {
         return result;
     }
 
+    @RequestMapping("/content/delete")
+    @ResponseBody
+    public TaotaoResult deleteContent(long[] ids){
+        TaotaoResult result = contentService.deleteContent(ids);
+        return result;
+    }
 }

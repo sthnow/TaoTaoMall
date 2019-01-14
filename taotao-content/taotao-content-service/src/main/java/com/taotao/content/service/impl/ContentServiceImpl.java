@@ -23,4 +23,15 @@ public class ContentServiceImpl implements ContentService {
         contentMapper.insert(content);
         return TaotaoResult.ok();
     }
+
+    @Override
+    /**
+     * 删除内容的方法
+     */
+    public TaotaoResult deleteContent(long[] ids) {
+        for (long id : ids){
+            contentMapper.deleteByPrimaryKey(id);
+        }
+        return TaotaoResult.ok();
+    }
 }
