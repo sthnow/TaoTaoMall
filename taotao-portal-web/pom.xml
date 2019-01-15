@@ -25,6 +25,12 @@
         <!--<groupId>com.taotao</groupId>-->
         <!--</dependency>-->
 
+        <dependency>
+            <artifactId>taotao-content-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <groupId>com.taotao</groupId>
+        </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
