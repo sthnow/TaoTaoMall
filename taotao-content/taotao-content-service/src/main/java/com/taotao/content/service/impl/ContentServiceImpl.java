@@ -32,6 +32,10 @@ public class ContentServiceImpl implements ContentService {
         content.setUpdated(new Date());
         //插入到内容表
         contentMapper.insert(content);
+
+        //同步缓存
+        //删除对应的缓存信息
+        jedisClient.hdel(INDEX_CONTENT, content.getCategoryId().toString());
         return TaotaoResult.ok();
     }
 
@@ -83,8 +87,6 @@ public class ContentServiceImpl implements ContentService {
             e.printStackTrace();
         }
         //缓存中没有命中，需要查询数据库
-
-
         TbContentExample example = new TbContentExample();
         TbContentExample.Criteria criteria = example.createCriteria();
         criteria.andCategoryIdEqualTo(cid);
