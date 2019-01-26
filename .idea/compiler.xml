@@ -17,11 +17,11 @@
         <module name="taotao-manager-web" />
         <module name="taotao-portal-web" />
         <module name="taotao-search-interface" />
+        <module name="taotao-search-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="pagehelper" target="1.7" />
-      <module name="taotao-search-web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
