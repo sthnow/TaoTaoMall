@@ -93,5 +93,10 @@
             <version>${zkclient.version}</version>
         </dependency>
 
+        <!--添加solrj依赖-->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+        </dependency>
     </dependencies>
 </project>

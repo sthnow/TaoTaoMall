@@ -22,6 +22,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="pagehelper" target="1.7" />
+      <module name="taotao-search" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
