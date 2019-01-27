@@ -1,4 +1,4 @@
-package com.taotao.com.taotao.mapper;
+package com.taotao.search.mapper;
 
 import com.taotao.common.pojo.SearchItem;
 
