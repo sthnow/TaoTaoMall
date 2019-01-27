@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>taotao.search</artifactId>
+    <artifactId>taotao-search</artifactId>
 
     <packaging>pom</packaging>
     <modules>
@@ -37,7 +37,7 @@
                     <!--启动工程的工程名-->
                     <path>/</path>
                     <!--端口号-->
-                    <!--访问的时候输入localhost:8081/-->
+                    <!--访问的时候输入localhost:8084/-->
                     <port>8084</port>
                 </configuration>
             </plugin>

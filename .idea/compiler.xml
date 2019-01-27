@@ -17,6 +17,7 @@
         <module name="taotao-manager-web" />
         <module name="taotao-portal-web" />
         <module name="taotao-search-interface" />
+        <module name="taotao-search-service" />
         <module name="taotao-search-web" />
       </profile>
     </annotationProcessing>

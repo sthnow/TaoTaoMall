@@ -11,10 +11,10 @@
 
     <artifactId>taotao-search-service</artifactId>
 
-    <packaging>pom</packaging>
-    <modules>
-        <module>taotao-search-web</module>
-    </modules>
+    <packaging>war</packaging>
+    <!--<modules>-->
+        <!--<module>taotao-search-web</module>-->
+    <!--</modules>-->
 
 
     <dependencies>

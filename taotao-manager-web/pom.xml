@@ -24,6 +24,11 @@
             <version>1.0-SNAPSHOT</version>
             <groupId>com.taotao</groupId>
         </dependency>
+        <dependency>
+            <artifactId>taotao-search-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <groupId>com.taotao</groupId>
+        </dependency>
         <!--依赖taotao-content-interface接口-->
         <dependency>
             <artifactId>taotao-content-interface</artifactId>
