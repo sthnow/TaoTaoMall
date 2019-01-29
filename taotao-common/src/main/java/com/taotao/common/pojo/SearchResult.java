@@ -22,4 +22,14 @@ public class SearchResult implements Serializable {
 
     private int totlaPages;
     private List<SearchItem> itemList;
+
+    public long getRecordCount() {
+        return recordCount;
+    }
+
+    public void setRecordCount(long recordCount) {
+        this.recordCount = recordCount;
+    }
+
+    private long recordCount;
 }
