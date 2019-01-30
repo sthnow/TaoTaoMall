@@ -26,7 +26,7 @@ http://code.alibabatech.com/schema/dubbo ">
     <dubbo:protocol name="dubbo" port="20882"/>
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.taotao.search.service.SearchItemService" ref="searchItemServiceImpl" timeout="300000"/>
-    <!--<dubbo:service interface="com.taotao.content.service.ContentService" ref="contentService" timeout="300000"/>-->
+    <dubbo:service interface="com.taotao.search.service.SearchService" ref="searchServiceimpl" timeout="300000"/>
 
     <!--<dubbo:service interface="com.taotao.service.ItemService" ref="itemServiceImpl" timeout="300000"/>-->
 
