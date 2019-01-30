@@ -48,7 +48,7 @@ public class SearchDao {
 
             //取高亮显示
             Map<String, Map<String, List<String>>> highlighting = ((QueryResponse) response).getHighlighting();
-            List<String> list = highlighting.get("id").get("item_title");
+            List<String> list = highlighting.get(solrDocument.get("id")).get("item_title");
             String title = "";
             if (list != null && list.size() > 0) {
                 title = list.get(0);
@@ -60,7 +60,7 @@ public class SearchDao {
 
             //添加到商品列表
             itemList.add(item);
-           
+
 
 
         }
