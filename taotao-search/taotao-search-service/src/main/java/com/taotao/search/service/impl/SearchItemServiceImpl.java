@@ -30,9 +30,9 @@ public class SearchItemServiceImpl implements SearchItemService {
             //2.遍历商品数据添加到索引库
             for (SearchItem searchItem : itemList) {
                 //创建文档对象
-                //向文档中添加域
-                //把文档写入索引库
                 SolrInputDocument document = new SolrInputDocument();
+                //向文档中添加域
+                //这些个域是在solrhome的schema文件中定义好的.这个文件中不仅定义了域，还定义了使用什么分词器
                 document.addField("id", searchItem.getId());
                 document.addField("item_title", searchItem.getTitle());
                 document.addField("item_sell_point", searchItem.getSell_point());
@@ -40,14 +40,14 @@ public class SearchItemServiceImpl implements SearchItemService {
                 document.addField("item_image", searchItem.getImage());
                 document.addField("item_category_name", searchItem.getCategory_name());
                 document.addField("item_desc", searchItem.getItem_desc());
-
+                //把文档写入索引库
                 solrServer.add(document);
             }
             //3.提交
             solrServer.commit();
         }catch (Exception e){
             e.printStackTrace();
-            return TaotaoResult.build(500, "数据导入失败1");
+            return TaotaoResult.build(500, "数据导入失败");
         }
         //4.返回添加成功
         return TaotaoResult.ok();

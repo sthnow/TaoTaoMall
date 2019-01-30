@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 public class SearchResult implements Serializable {
-    public int getTotlaPages() {
+    public long getTotlaPages() {
         return totlaPages;
     }
 
-    public void setTotlaPages(int totlaPages) {
+    public void setTotlaPages(long totlaPages) {
         this.totlaPages = totlaPages;
     }
 
@@ -20,7 +20,7 @@ public class SearchResult implements Serializable {
         this.itemList = itemList;
     }
 
-    private int totlaPages;
+    private long totlaPages;
     private List<SearchItem> itemList;
 
     public long getRecordCount() {

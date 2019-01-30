@@ -21,8 +21,10 @@ import java.util.Map;
  */
 @Repository
 public class SearchDao {
+
     @Autowired
     private SolrServer solrServer;
+
     public SearchResult search(SolrQuery query) throws  Exception{
         //根据query对象进行查询
         SolrResponse response = solrServer.query(query);
@@ -36,12 +38,14 @@ public class SearchDao {
         List<SearchItem> itemList = new ArrayList<>();
         //把结果封装到SearchResult对象中
         for (SolrDocument solrDocument : solrDocumentList){
+            //封装对象
             SearchItem item = new SearchItem();
             item.setCategory_name((String) solrDocument.get("item_category_name"));
             item.setId((String) solrDocument.get("id"));
             item.setImage((String) solrDocument.get("item_image"));
             item.setPrice((Long) solrDocument.get("item_price"));
             item.setSell_point((String) solrDocument.get("item_sell_point"));
+
             //取高亮显示
             Map<String, Map<String, List<String>>> highlighting = ((QueryResponse) response).getHighlighting();
             List<String> list = highlighting.get("id").get("item_title");
@@ -52,9 +56,11 @@ public class SearchDao {
             }else{
                 title = (String) solrDocument.get("item_title");
             }
+            item.setTitle(title);
+
             //添加到商品列表
             itemList.add(item);
-            item.setTitle((String) solrDocument.get("item_title"));
+           
 
 
         }
