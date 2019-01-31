@@ -29,9 +29,11 @@ public class SearchController {
     //使用String作为返回值，SpringMVC可以根据这个字符串自动找到对应的页面
     public String search(@RequestParam("q") String queryString,
                          @RequestParam(defaultValue = "1") Integer page,
-                         Model model) {
+                         Model model) throws Exception {
+
+        int a = 1/0;
         //调用服务执行查询
-        try {
+
             //把查询条件进行转码，解决get乱码问题
             //取出queryString的字节，然后通过String类的方法转换成对应的格式
             queryString = new String(queryString.getBytes("iso-8859-1"),"utf-8");
@@ -43,9 +45,6 @@ public class SearchController {
             model.addAttribute("itemList", searchResult.getItemList());
             model.addAttribute("page", page);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         //返回逻辑视图
         return "search";
