@@ -17,4 +17,22 @@
       WHERE
       a.`status` = 1
   </select>
+  <select id="getItemById" parameterType="long" resultType="com.taotao.common.pojo.SearchItem">
+    SELECT
+      a.id,
+      a.title,
+      a.sell_point,
+      a.price,
+      a.image,
+      b. NAME category_name,
+      c.item_desc
+      FROM tb_item a
+      LEFT JOIN tb_item_cat b on a.cid = b.id
+      LEFT JOIN tb_item_desc c on a.id = c.item_id
+      WHERE
+      a.`status` = 1
+      and
+--       因为是简单数据类型所以可以随便写
+      a.id = #{itemId}
+  </select>
 </mapper>
