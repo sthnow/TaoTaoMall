@@ -5,6 +5,7 @@ import org.apache.activemq.command.ActiveMQTextMessage;
 import org.junit.Test;
 
 import javax.jms.*;
+import javax.xml.soap.Text;
 
 public class TestActiveMq {
 
@@ -19,7 +20,7 @@ public class TestActiveMq {
         //3.开启连接，调用connection对象的start方法
         connection.start();
         //4.使用connection对象创建一个session对象
-        //第一个参数是是否开启事务，一般不使用事务。保证数据的最终一，可以使用消息队列实现
+        //第一个参数是是否开启事务（分布式事务），一般不使用事务。保证数据的最终一，可以使用消息队列实现
         //如果第一个参数为true,那么第二个参数自动忽略
         //如果第一个参数为false，第二个参数是消息的应答模式，通常有两种，手动应答和自动应答，一般为自动应答
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -31,7 +32,7 @@ public class TestActiveMq {
         //7.创建一个TextMessage对象
 //        TextMessage textMessage = new ActiveMQTextMessage();
 //        textMessage.setText("hello activeMq");
-        TextMessage textMessage = session.createTextMessage("hellp activeMq");
+        TextMessage textMessage = session.createTextMessage("hello activeMq");
         //8.发送消息
         producer.send(textMessage);
         //9.关闭资源
@@ -39,5 +40,48 @@ public class TestActiveMq {
         session.close();
         connection.close();
 
+    }
+
+    @Test
+    //接收消息
+    public void testQueueConsumer() throws Exception{
+        //创建一个连接工厂对象
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.25.100:61616");
+        //使用连接工厂对象创建一个连接
+        Connection connection = connectionFactory.createConnection();
+        //开启连接
+        connection.start();
+        //使用连接对象创建一个session对象
+        final Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        //使用session创建一个destination，destination应该和消息的发送端一致
+        Queue queue = session.createQueue("test-queue");
+        //使用session创建一个消费者对象
+        MessageConsumer consumer = session.createConsumer(queue);
+        //向consumer对象中设置一个messageListener对象，用来接收消息
+        consumer.setMessageListener(new MessageListener() {
+            @Override
+            public void onMessage(Message message) {
+                //取消息的内容
+                if(message instanceof TextMessage){
+                    TextMessage textMessage = (TextMessage) message;
+                    try {
+                        String text = textMessage.getText();
+                        //打印消息内容
+                        System.out.println(text);
+                    } catch (JMSException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        //系统等待接收消息
+//        while(true){
+//            Thread.sleep(100);
+//        }
+        System.in.read();
+        //关闭资源
+        consumer.close();
+        session.close();
+        connection.close();
     }
 }
