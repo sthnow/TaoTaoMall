@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * 监听商品添加事件，同步索引库
  */
-public class itemAddMessageListener implements MessageListener {
+public class ItemAddMessageListener implements MessageListener {
 
     @Autowired
     private SearchItemMapper searchItemMapper;

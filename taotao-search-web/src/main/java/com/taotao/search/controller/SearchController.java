@@ -31,7 +31,7 @@ public class SearchController {
                          @RequestParam(defaultValue = "1") Integer page,
                          Model model) throws Exception {
 
-        int a = 1/0;
+
         //调用服务执行查询
 
             //把查询条件进行转码，解决get乱码问题
