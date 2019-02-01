@@ -113,4 +113,99 @@ public class TestActiveMq {
         connection.close();
 
     }
+
+    @Test
+    //接收topic消息
+    public void testTopicConsumer1() throws Exception{
+        //创建连接工厂对象
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.25.100:61616");
+        //创建连接工厂
+        Connection connection = connectionFactory.createConnection();
+        //开启连接
+        connection.start();
+        //创建session
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        //创建destination,相当于指定消息队列的名称，找那个消息队列接收消息
+        Topic topic = session.createTopic("test-topic");
+        //使用session创建一个消费者对象
+        MessageConsumer consumer = session.createConsumer(topic);
+        //向consumer对象中设置一个messageListener对象，用来接收消息
+        consumer.setMessageListener(new MessageListener(){
+
+            @Override
+            public void onMessage(Message message) {
+                //取消息的内容
+                //如果是testMessage的实例
+                if(message instanceof TextMessage){
+                    //强转类型
+                    TextMessage textMessage = (TextMessage) message;
+                    try {
+                        //得到消息内容
+                        String text = textMessage.getText();
+                        //打印消息内容
+                        System.out.println(text);
+                    } catch (JMSException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        //系统等待接收消息
+//        while(true){
+//            Thread.sleep(100);
+//        }
+        System.in.read();
+        //关闭资源
+        consumer.close();
+        session.close();
+        connection.close();
+    }
+
+    @Test
+    //接收topic消息
+    public void testTopicConsumer2() throws Exception{
+        //创建连接工厂对象
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.25.100:61616");
+        //创建连接工厂
+        Connection connection = connectionFactory.createConnection();
+        //开启连接
+        connection.start();
+        //创建session
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        //创建destination,相当于指定消息队列的名称，找那个消息队列接收消息
+        Topic topic = session.createTopic("test-topic");
+        //使用session创建一个消费者对象
+        MessageConsumer consumer = session.createConsumer(topic);
+        //向consumer对象中设置一个messageListener对象，用来接收消息
+        consumer.setMessageListener(new MessageListener(){
+
+            @Override
+            public void onMessage(Message message) {
+                //取消息的内容
+                //如果是testMessage的实例
+                if(message instanceof TextMessage){
+                    //强转类型
+                    TextMessage textMessage = (TextMessage) message;
+                    try {
+                        //得到消息内容
+                        String text = textMessage.getText();
+                        //打印消息内容
+                        System.out.println(text);
+                    } catch (JMSException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        //系统等待接收消息
+//        while(true){
+//            Thread.sleep(100);
+//        }
+        System.in.read();
+        //关闭资源
+        consumer.close();
+        session.close();
+        connection.close();
+    }
+
 }
