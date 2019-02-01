@@ -12,8 +12,12 @@ import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.jms.*;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +36,12 @@ public class itemServiceImpl implements ItemService {
         TbItem item = itemMapper.selectByPrimaryKey(itemId);
         return item;
     }
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Resource(name = "itemAddTopic")
+    private Destination destination;
 
     @Override
     /**
@@ -67,7 +77,7 @@ public class itemServiceImpl implements ItemService {
      */
     public TaotaoResult addItem(TbItem item, String desc) {
         //使用IDUtils工具生成商品的id，使用这个工具类生成id是因为这个工具类里面封装了一些方法，使得生成的id不易重复
-        long itemId = IDUtils.genItemId();
+        final long itemId = IDUtils.genItemId();
 
         //从pojo中获取属性
         //补全item的属性，因为要存放到数据库的表中，该有的属性必须要有
@@ -89,6 +99,15 @@ public class itemServiceImpl implements ItemService {
         //向商品描述插入数据
         //调用DAO层的insert方法插入数据
         itemDescMapper.insert(itemDesc);
+
+        //向Activemq发送商品添加消息
+        jmsTemplate.send(destination, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                TextMessage textMessage = session.createTextMessage(itemId + "");
+                return textMessage;
+            }
+        });
         //返回结果
         return TaotaoResult.ok();
     }
