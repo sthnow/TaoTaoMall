@@ -84,4 +84,33 @@ public class TestActiveMq {
         session.close();
         connection.close();
     }
+
+
+
+    @Test
+    //topic消息
+    //producer
+    public void testTopicProducer() throws Exception{
+        //创建连接工厂对象
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.25.100:61616");
+        //创建连接
+        Connection connection = connectionFactory.createConnection();
+        //开启连接
+        connection.start();
+        //创建session
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        //创建destination，使用topic
+        Topic topic = session.createTopic("test-topic");
+        //创建producer对象
+        MessageProducer producer = session.createProducer(topic);
+        //创建一个testMessage对象
+        TextMessage hello_topic = session.createTextMessage("hello topic");
+        //发送消息
+        producer.send(hello_topic);
+        //关闭资源
+        producer.close();
+        session.close();
+        connection.close();
+
+    }
 }
