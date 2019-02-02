@@ -167,4 +167,10 @@ public class itemServiceImpl implements ItemService {
         //如果修改成功，返回200，返回200的方法写在了TaoTaoResult中的ok方法
         return TaotaoResult.ok();
     }
+
+    @Override
+    public TbItemDesc getItemDescById(long itemId) {
+        TbItemDesc itemDesc = itemDescMapper.selectByPrimaryKey(itemId);
+        return itemDesc;
+    }
 }

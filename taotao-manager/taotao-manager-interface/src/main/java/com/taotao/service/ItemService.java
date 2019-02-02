@@ -3,6 +3,7 @@ package com.taotao.service;
 import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemDesc;
 
 public interface ItemService {
 
@@ -19,4 +20,6 @@ public interface ItemService {
 
     //实现商品上架功能
     TaotaoResult reshelf(long[] ids);
+
+    TbItemDesc getItemDescById(long itemId);
 }

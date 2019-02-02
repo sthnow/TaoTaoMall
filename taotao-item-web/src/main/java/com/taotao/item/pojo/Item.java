@@ -2,6 +2,7 @@ package com.taotao.item.pojo;
 
 import com.taotao.pojo.TbItem;
 
+//为什么不需要实现序列化接口？
 public class Item extends TbItem {
 
     public Item(TbItem tbItem){
