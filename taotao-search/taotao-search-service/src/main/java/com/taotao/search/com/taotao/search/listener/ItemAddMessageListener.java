@@ -24,6 +24,7 @@ public class ItemAddMessageListener implements MessageListener {
     private SearchItemMapper searchItemMapper;
     @Autowired
     private SolrServer solrServer;
+
     @Override
     public void onMessage(Message message) {
         //从消息中取商品id
@@ -34,6 +35,7 @@ public class ItemAddMessageListener implements MessageListener {
             long itemId = Long.parseLong(text);
             //等待事务提交
             Thread.sleep(1000);
+
             //根据商品id查询数据库，取商品信息
             SearchItem searchItem = searchItemMapper.getItemById(itemId);
             //创建文档对象

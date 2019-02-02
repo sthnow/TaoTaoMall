@@ -38,6 +38,7 @@
 
 
     <bean id="itemAddMessageListener" class="com.taotao.search.com.taotao.search.listener.ItemAddMessageListener"></bean>
+
     <!--配置消息的接收者-->
     <bean  class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="connectionFactory" ref="connectionFactory"></property>
