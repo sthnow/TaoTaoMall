@@ -5,13 +5,17 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.IDUtils;
+import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.service.ItemService;
+import jedis.JedisClient;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
@@ -31,9 +35,42 @@ public class itemServiceImpl implements ItemService {
     @Autowired
     private TbItemDescMapper itemDescMapper;
 
+    @Autowired
+    private JedisClient jedisClient;
+
+    @Value("${ITEM_INFO}")
+    private String ITEM_INFO;
+
+    @Value("${ITEM_EXPIRE}")
+    private Integer ITEM_EXPIRE;
+
+    @Value("${ITEM_DESC")
+    private String ITEMDESC;
+
     @Override
     public TbItem getItemById(long itemId) {
+        //查询数据库之前先查询缓存
+        try {
+            String json = jedisClient.get(ITEM_INFO + ":" + itemId + "BASE");
+            if(StringUtils.isNotBlank(json)){
+                //把json数据转换成pojo
+                TbItem tbItem = JsonUtils.jsonToPojo(json, TbItem.class);
+                return tbItem;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //如果缓存中没有则查询数据库
         TbItem item = itemMapper.selectByPrimaryKey(itemId);
+
+        try {
+            //将查询结果添加到缓存
+            jedisClient.set(ITEM_INFO + ":" + itemId + "BASE", JsonUtils.objectToJson(item));
+            //设置过期时间，提高缓存利用率
+            jedisClient.expire(ITEM_INFO + ":" + itemId + "BASE", ITEM_EXPIRE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return item;
     }
 
@@ -121,8 +158,6 @@ public class itemServiceImpl implements ItemService {
     }
 
 
-
-
     @Override
 
     /**
@@ -153,7 +188,7 @@ public class itemServiceImpl implements ItemService {
      * 在接口中新添加了一个方法以后要install，如果不适用install相当于还在使用旧的jar包
      */
     public TaotaoResult reshelf(long[] ids) {
-        for(long id : ids) {
+        for (long id : ids) {
             //1.通过主键查询到item
             TbItem item = itemMapper.selectByPrimaryKey(id);
             //2.使用pojo中的方法修改其状态属性
@@ -170,7 +205,27 @@ public class itemServiceImpl implements ItemService {
 
     @Override
     public TbItemDesc getItemDescById(long itemId) {
+        //查询数据库之前先查询缓存
+        try {
+            String json = jedisClient.get(ITEM_INFO + ":" + itemId + "DESC");
+            if(StringUtils.isNotBlank(json)){
+                //把json数据转换成pojo
+                TbItemDesc tbItemDesc = JsonUtils.jsonToPojo(json, TbItemDesc.class);
+                return tbItemDesc;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //如果缓存中没有则查询数据库
         TbItemDesc itemDesc = itemDescMapper.selectByPrimaryKey(itemId);
+        try {
+            //将查询结果添加到缓存
+            jedisClient.set(ITEM_INFO + ":" + itemDesc + "DESC", JsonUtils.objectToJson(itemDesc));
+            //设置过期时间，提高缓存利用率
+            jedisClient.expire(ITEM_INFO + ":" + itemDesc + "DESC", ITEM_EXPIRE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return itemDesc;
     }
 }
