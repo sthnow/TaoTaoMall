@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class TestSolrCloud {
 
-    @Test
+
     public void testSolrCloudAdDocument() throws Exception{
 
         //创建一个CloudSolrServer对象，在构造方法中指定zookeeper的地址列表
