@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ItemController {
 
     @Autowired
+//    根据类型给接口装配实现类，@Autowired这种方法只适用于接口有一个实现类的情况
+//    如果要按名称装配实现类，可以用 @Resource(name="baseDao") 和 @Autowired() @Qualifier("baseDao")
     private ItemService itemService;
 
     @RequestMapping("/item/{itemId}")
