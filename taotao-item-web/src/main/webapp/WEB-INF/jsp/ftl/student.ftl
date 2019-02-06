@@ -53,5 +53,10 @@
         </tr>
     </#list>
 </table>
+<br>
+日期类型的处理：${date?string("yyyy-MM-DD HH:mm:ss")}
+<br>
+include标签测试：
+<#include "hello.ftl">
 </body>
 </html>
