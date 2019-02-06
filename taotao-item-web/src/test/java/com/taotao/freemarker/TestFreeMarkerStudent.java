@@ -7,7 +7,9 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TestFreeMarkerStudent {
@@ -26,8 +28,17 @@ public class TestFreeMarkerStudent {
         Map data = new HashMap();
         Student student = new Student(1,"小名",23,"北京");
         data.put("student", student);
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(new Student(1,"小名1",13,"北京"));
+        studentList.add(new Student(2,"小名2",23,"北京"));
+        studentList.add(new Student(3,"小名3",33,"北京"));
+        studentList.add(new Student(4,"小名4",43,"北京"));
+        studentList.add(new Student(5,"小名5",53,"北京"));
+        studentList.add(new Student(6,"小名6",63,"北京"));
+        studentList.add(new Student(7,"小名7",73,"北京"));
+        data.put("studentList", studentList);
         //7.创建一个writer对象，指定输出的路径及文件名
-        Writer out = new FileWriter(new File("C:\\Users\\wangz\\IdeaProjects\\cache\\html\\out\\student.txt"));
+        Writer out = new FileWriter(new File("C:\\Users\\wangz\\IdeaProjects\\cache\\html\\out\\student.html"));
         //8.使用模板对象的process方法输出文件
         template.process(data, out);
         //9.关闭流
