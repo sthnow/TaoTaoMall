@@ -31,7 +31,7 @@ public class HtmlGenController {
         Template template = configuration.getTemplate("hello.ftl");
         //创建一个数据集
         Map data = new HashMap();
-        data.put("hello", "hello freemarker Spring");
+        data.put("hello", "hello freemarker Sprin");
         Writer out = new FileWriter("C:\\Users\\wangz\\IdeaProjects\\cache\\html\\out\\text.html");
         template.process(data,out);
         out.close();

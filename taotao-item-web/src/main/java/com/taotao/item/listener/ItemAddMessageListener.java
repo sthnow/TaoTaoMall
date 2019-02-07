@@ -29,7 +29,7 @@ public class ItemAddMessageListener implements MessageListener {
     @Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
 
-    @Value("HTML_OUT_PATH")
+    @Value("${HTML_OUT_PATH}")
     private String HTML_OUT_PATH;
 
     @Override
@@ -40,6 +40,8 @@ public class ItemAddMessageListener implements MessageListener {
         try {
             strId = textMessage.getText();
             long itemId = Long.parseLong(strId);
+            //等待事务提交
+            Thread.sleep(1000);
             //根据商品id查询商品信息及商品描述
             TbItem tbItem = itemService.getItemById(itemId);
             Item item = new Item(tbItem);
@@ -70,6 +72,8 @@ public class ItemAddMessageListener implements MessageListener {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
