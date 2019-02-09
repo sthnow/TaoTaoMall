@@ -13,7 +13,6 @@
     <!--加载属性文件-->
     <context:property-placeholder location="classpath:resource/resource.properties"/>
 
-
     <!-- 配置注解驱动 -->
     <mvc:annotation-driven />
     <!-- 视图解析器 -->
@@ -31,23 +30,7 @@
     <dubbo:application name="taotao-sso-web"/>
     <dubbo:registry   protocol="zookeeper" address="zookeeper://192.168.25.88:2181"/>
 
-    <!--<dubbo:reference  interface="com.taotao.service.ItemService" id="itemService" />-->
-    <!--<dubbo:reference  interface="com.taotao.service.ItemCatService " id="itemCatService " />-->
-
-
-    <!--&lt;!&ndash;消费方dubbo的配置&ndash;&gt;-->
-    <!--&lt;!&ndash;采用直连的形式，不通过注册中心zookeeper获取服务，直接通过端口通信-->
-   <!--&ndash;&gt;-->
-
-    <!--&lt;!&ndash;&lt;!&ndash;消费方应用信息，用于计算依赖关系&ndash;&gt;&ndash;&gt;-->
-    <!--<dubbo:application name="consumer"/>-->
-
-    <!--&lt;!&ndash;&lt;!&ndash;采用直连，不实用注册中心&ndash;&gt;&ndash;&gt;-->
-    <!--<dubbo:registry address="N/A"/>-->
-
-    <!--<dubbo:reference interface="com.taotao.service.ItemService" id="itemService"-->
-                     <!--url="dubbo://127.0.0.1:10001"/>-->
-
+    <dubbo:reference  interface="com.taotao.sso.service.UserService" id="userService" />
 
     <!--配置资源映射-->
     <!--如果不配置这个，SpringMVC会拦截掉静态资源-->
