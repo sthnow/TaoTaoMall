@@ -1,17 +1,21 @@
 package com.taotao.sso.service.impl;
 
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.common.utils.JsonUtils;
+import com.taotao.jedis.JedisClient;
 import com.taotao.mapper.TbUserMapper;
 import com.taotao.pojo.TbUser;
 import com.taotao.pojo.TbUserExample;
 import com.taotao.sso.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户处理Service
@@ -21,6 +25,15 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private TbUserMapper tbUserMapper;
+
+    @Autowired
+    private JedisClient jedisClient;
+
+    @Value("${USER_SESSION")
+    private String USER_SESSION;
+
+    @Value("${SESSION_EXPIRE}")
+    private Integer SESSION_EXPIRE;
 
     @Override
     public TaotaoResult checkUserData(String data, int type) {
@@ -73,6 +86,7 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.isBlank(user.getPassword())) {
             return TaotaoResult.build(400, "密码不能为空");
         }
+
         if (StringUtils.isNotBlank(user.getPhone())) {
             //是否重复校验
             TaotaoResult phoneResult = checkUserData(user.getPhone(), 2);
@@ -98,5 +112,35 @@ public class UserServiceImpl implements UserService {
         //返回注册成功
         return TaotaoResult.ok();
 
+    }
+
+    @Override
+    public TaotaoResult login(String username, String password) {
+        //判断用户名和密码是否正确
+        TbUserExample tbUserExample = new TbUserExample();
+        TbUserExample.Criteria criteria = tbUserExample.createCriteria();
+        criteria.andUsernameEqualTo(username);
+        List<TbUser> list = tbUserMapper.selectByExample(tbUserExample);
+        if(list == null && list.size() == 0){
+            //返回登录失败
+            return TaotaoResult.build(400, "用户名或密码不正确");
+        }
+        //密码要进行md5加密后的校验
+        TbUser tbUser = list.get(0);
+        if(!DigestUtils.md5DigestAsHex(password.getBytes()).equals(tbUser.getPassword())) {
+            //返回登录失败
+            return TaotaoResult.build(400, "用户名或密码不正确");
+        }
+
+        //生成token，使用uuid
+        String token = UUID.randomUUID().toString();
+        //把用户信息保存到redis，key就是token，value就是用户信息
+        //清空密码
+        tbUser.setPassword(null);
+        jedisClient.set(USER_SESSION+ ":" + token, JsonUtils.objectToJson(tbUser));
+        //设置key的过期时间
+        jedisClient.expire(USER_SESSION+ ":" + token,SESSION_EXPIRE);
+        //返回登录成功，其中把token返回
+        return TaotaoResult.ok(token);
     }
 }

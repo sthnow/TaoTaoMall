@@ -8,4 +8,6 @@ public interface UserService {
     TaotaoResult checkUserData(String data, int type);
 
     TaotaoResult register(TbUser user);
+
+    TaotaoResult login(String username, String password);
 }
