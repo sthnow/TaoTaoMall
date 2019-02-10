@@ -157,4 +157,12 @@ public class UserServiceImpl implements UserService {
         return TaotaoResult.ok(user);
     }
 
+    @Override
+    public TaotaoResult logout(String token) {
+        //根据token删除存储在redis中的信息
+        jedisClient.del(token);
+        return TaotaoResult.ok();
+    }
+
+
 }
