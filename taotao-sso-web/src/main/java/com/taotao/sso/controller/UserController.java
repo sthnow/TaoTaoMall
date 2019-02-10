@@ -58,4 +58,13 @@ public class UserController {
     }
 
 
+
+    @RequestMapping(value = "/user/logout/{token}",method = RequestMethod.GET)
+    @ResponseBody
+    public TaotaoResult logout(@PathVariable String token){
+        TaotaoResult result = userService.logout(token);
+        return  result;
+    }
+
+
 }
