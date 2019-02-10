@@ -49,4 +49,13 @@ public class UserController {
         CookieUtils.setCookie(request,response,TOKEN_KEY,result.getData().toString());
         return result;
     }
+
+    @RequestMapping(value = "/token/{token}",method = RequestMethod.GET)
+    @ResponseBody
+    public TaotaoResult getUserByToken(@PathVariable String token){
+        TaotaoResult result = userService.getUserByToken(token);
+        return result;
+    }
+
+
 }
