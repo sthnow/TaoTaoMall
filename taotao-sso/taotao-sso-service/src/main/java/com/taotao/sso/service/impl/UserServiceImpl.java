@@ -156,4 +156,5 @@ public class UserServiceImpl implements UserService {
         TbUser user = JsonUtils.jsonToPojo(json, TbUser.class);
         return TaotaoResult.ok(user);
     }
+
 }
