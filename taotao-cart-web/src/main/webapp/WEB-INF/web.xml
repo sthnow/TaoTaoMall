@@ -35,7 +35,7 @@
     </servlet>
     <servlet-mapping>
     <servlet-name>taotao-cart-web</servlet-name>
-        <!-- 拦截所有请求jsp除外 -->
+
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 </web-app>
