@@ -76,6 +76,11 @@ public class CartController {
         return "cartSuccess";
     }
 
+    /**
+     * 从购物车取商品列表
+     * @param request
+     * @return
+     */
     private List<TbItem> getCartItemList(HttpServletRequest request) {
         //从cookie中取出购物车商品列表
         String json = CookieUtils.getCookieValue(request, CART_KEY, true);
