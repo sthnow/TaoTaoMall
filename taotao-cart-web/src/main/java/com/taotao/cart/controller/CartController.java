@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,8 +70,8 @@ public class CartController {
             cartItemList.add(tbItem);
         }
         //把购物车列表写入cookie
-        CookieUtils.setCookie(request,response,CART_KEY,JsonUtils.objectToJson(cartItemList),
-                CART_EXPIRE,true);
+        CookieUtils.setCookie(request, response, CART_KEY, JsonUtils.objectToJson(cartItemList),
+                CART_EXPIRE, true);
         //返回添加成功页面
         return "cartSuccess";
     }
@@ -90,7 +91,7 @@ public class CartController {
      * 显示购物车列表
      */
     @RequestMapping("/cart/cart")
-    public String showCartList(HttpServletRequest request){
+    public String showCartList(HttpServletRequest request) {
         //从cookie中取购物车列表
         List<TbItem> cartItemList = getCartItemList(request);
         //把购物车列表传递给jsp
@@ -101,25 +102,50 @@ public class CartController {
 
     @RequestMapping("/cart/update/num/{itemId}/{num}")
     @ResponseBody
-    public TaotaoResult updateItemNum(@PathVariable Long itemId,@PathVariable  Integer num,
+    public TaotaoResult updateItemNum(@PathVariable Long itemId, @PathVariable Integer num,
                                       HttpServletRequest request,
-                                      HttpServletResponse response){
+                                      HttpServletResponse response) {
         //从cookie中取购物车列表
         List<TbItem> cartItemList = getCartItemList(request);
         //查询到对应的商品
         for (TbItem tbItem : cartItemList) {
-            if(tbItem.getId() == itemId.longValue()){
+            if (tbItem.getId() == itemId.longValue()) {
                 //跟新商品数量
                 tbItem.setNum(num);
                 break;
             }
         }
         //把购物车列表写入cookie
-        CookieUtils.setCookie(request,response,CART_KEY,JsonUtils.objectToJson(cartItemList),
-                CART_EXPIRE,true);
+        CookieUtils.setCookie(request, response, CART_KEY, JsonUtils.objectToJson(cartItemList),
+                CART_EXPIRE, true);
         //返回逻辑视图
         return TaotaoResult.ok();
-
     }
 
+    @RequestMapping("/cart/delete/{itemId}")
+    @ResponseBody
+    public ModelAndView deleteItemCart(@PathVariable Long itemId,
+                                       HttpServletRequest request,
+                                       HttpServletResponse response) {
+        //从cookie中获取购物车列表
+        List<TbItem> cartItemList = getCartItemList(request);
+        //查询到购物车列表
+        //找到对应商品并删除
+//       for(int i = 0; i<cartItemList.size();i++){
+//           if(cartItemList.get(i).getId() == itemId.longValue()){
+//               cartItemList.remove(i);
+//           }
+//        }
+        for (TbItem tbItem : cartItemList) {
+            if (tbItem.getId() == itemId.longValue()) {
+                cartItemList.remove(tbItem);
+                break;
+            }
+        }
+//更新cookie
+        CookieUtils.setCookie(request, response, CART_KEY, JsonUtils.objectToJson(cartItemList),
+                CART_EXPIRE, true);
+        //返回页面
+        return new ModelAndView("redirect:/cart/cart.html");
+    }
 }
