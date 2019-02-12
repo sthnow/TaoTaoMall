@@ -49,7 +49,6 @@ public class LoginInterceptor implements HandlerInterceptor {
             //拦截
             return false;
         }
-
         //5.如果取到登录信息。放行
         return true;
 

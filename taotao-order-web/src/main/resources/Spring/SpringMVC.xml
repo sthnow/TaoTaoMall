@@ -15,13 +15,13 @@
 
 
     <!-- 配置注解驱动 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
     <!-- 视图解析器 -->
     <!--当SpringMVC拦截到请求时，会给controller返回的字符串加上这里配置的前缀和后缀，然后去访问路径下的文件-->
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
 
@@ -29,14 +29,11 @@
     <context:component-scan base-package="com.taotao.order.controller"/>
 
 
-
-
-
     <!--&lt;!&ndash; 引用dubbo服务 &ndash;&gt;-->
     <dubbo:application name="taotao-order-web"/>
-    <dubbo:registry   protocol="zookeeper" address="zookeeper://192.168.25.88:2181"/>
+    <dubbo:registry protocol="zookeeper" address="zookeeper://192.168.25.88:2181"/>
 
-    <dubbo:reference  interface="com.taotao.sso.service.UserService" id="userService" />
+    <dubbo:reference interface="com.taotao.sso.service.UserService" id="userService"/>
 
 
     <!--配置资源映射-->
@@ -46,7 +43,13 @@
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/js/**" location="/js/"/>
 
-
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/order/**"/>
+            <bean class="com.taotao.order.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 </beans>
