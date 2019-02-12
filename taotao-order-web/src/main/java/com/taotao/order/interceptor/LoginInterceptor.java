@@ -2,6 +2,8 @@ package com.taotao.order.interceptor;
 
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.CookieUtils;
+import com.taotao.common.utils.JsonUtils;
+import com.taotao.pojo.TbUser;
 import com.taotao.sso.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,9 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         //5.如果取到登录信息。放行
+        //把用户信息放到request中
+        TbUser tbUser = (TbUser) taotaoResult.getData();
+        httpServletRequest.setAttribute("user", tbUser);
         return true;
 
     }

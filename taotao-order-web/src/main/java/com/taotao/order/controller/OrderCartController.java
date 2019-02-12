@@ -3,6 +3,7 @@ package com.taotao.order.controller;
 import com.taotao.common.utils.CookieUtils;
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,8 @@ public class OrderCartController {
     public String showOrderCart(HttpServletRequest request){
         //用户必须是登录状态
         //取用户id
+        TbUser user = (TbUser)request.getAttribute("user");
+        System.out.println(user.getUsername());
         //根据用户信息取收货地址列表，使用静态数据模拟
         //把收货地址列表取出来传递给页面
         //从cookie中取购物车商品列表展示给页面
