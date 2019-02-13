@@ -1,4 +1,4 @@
-package jedis;
+package com.taotao.jedis;
 
 public interface JedisClient {
 

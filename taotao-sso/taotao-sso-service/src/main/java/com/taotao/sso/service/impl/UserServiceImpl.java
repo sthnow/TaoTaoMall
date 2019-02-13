@@ -114,6 +114,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @return
+     */
     @Override
     public TaotaoResult login(String username, String password) {
         //判断用户名和密码是否正确
