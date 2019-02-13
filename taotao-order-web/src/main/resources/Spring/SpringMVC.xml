@@ -34,6 +34,7 @@
     <dubbo:registry protocol="zookeeper" address="zookeeper://192.168.25.88:2181"/>
 
     <dubbo:reference interface="com.taotao.sso.service.UserService" id="userService"/>
+    <dubbo:reference interface="com.taotao.order.service.OrderService" id="orderService"/>
 
 
     <!--配置资源映射-->

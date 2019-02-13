@@ -11,6 +11,7 @@ import com.taotao.pojo.TbOrderItem;
 import com.taotao.pojo.TbOrderShipping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 /**
  * 订单处理Service
  */
+@Service
 public class OrderServiceImpl implements OrderService {
 
 
