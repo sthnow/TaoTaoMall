@@ -25,6 +25,8 @@ public class ContentServiceImpl implements ContentService {
     private JedisClient jedisClient;
     @Value("${INDEX_CONTENT}")
     private String INDEX_CONTENT;
+
+
     @Override
     public TaotaoResult addContent(TbContent content) {
        //补全pojo属性
